@@ -1,15 +1,16 @@
 import { PrismaClient } from "@prisma/client";
+import { response } from "express";
 import md5 from "md5";
 
 const prisma = new PrismaClient ()
 
 export const getAllUser = async (req, res) => {
 try {
-    const response = await prisma.user.findMany()
+    const response = await prisma.user.findMany() 
     res.status(200).json(response)
 } catch (error) {
     res.status(500).json({msg: error.message})
-    }
+}
 }
 
 
