@@ -46,7 +46,7 @@ try {
 
 export const updateUser = async (req, res) => {
 try {
-    const {nama_user, username, password} = req.body
+    const {nama_user, username, password, role} = req.body
     const result = await prisma.user.update({
         where:{
             id_user: Number(req.params.id)
@@ -54,7 +54,8 @@ try {
         data: {
             nama_user: nama_user,
             username: username,
-            password: md5(password)
+            password: md5(password),
+            role : role
         }
     })
     res.status(200).json(result)
