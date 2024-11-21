@@ -6,7 +6,7 @@ import {
     updateTransaksi,
     addTransaksi,
     deleteTransaksi
-} from '../controllers/transaksi_controller,.js'
+} from '../controllers/transaksi_controller.js'
 
 const app = express()
 app.use(express.json())

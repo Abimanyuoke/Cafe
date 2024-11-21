@@ -1,5 +1,4 @@
 import { PrismaClient } from "@prisma/client";
-import { response } from "express";
 import md5 from "md5";
 
 const prisma = new PrismaClient ()
@@ -29,12 +28,13 @@ try {
 
 export const addUser = async (req, res) => {
 try {
-    const {nama_user, username, password} = req.body
+    const {nama_user, username, password, role} = req.body
     const result = await prisma.user.create({
         data: {
             nama_user: nama_user,
             username: username,
-            password: md5(password)
+            password: md5(password),
+            role : role
         }
     })
     res.status(200).json(result)

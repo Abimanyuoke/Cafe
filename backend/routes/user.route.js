@@ -7,16 +7,18 @@ import {
     addUser,
     deleteUser
 } from '../controllers/user_controller.js'
-import { authenticate } from '../controllers/auth_controller.js'
+import { authenticate,  authorize } from '../controllers/auth_controller.js'
+import { IsAdmin, IsManager } from '../middleware/role_validation.js'
+
 
 const app = express()
 app.use(express.json())
 
 app.get('/',getAllUser)
-app.get('/:id', getUserById)
-app.post('/', addUser)
-app.put('/:id', updateUser)
-app.delete('/:id', deleteUser)
+app.get('/:id', getUserById) //siapapun boleh mengakses 
+app.post('/', addUser) //cara menambahkan manager
+app.put('/:id', authorize, [IsAdmin], updateUser)
+app.delete('/:id', authorize, [IsAdmin], deleteUser)
 
 app.post('login', authenticate)
 
