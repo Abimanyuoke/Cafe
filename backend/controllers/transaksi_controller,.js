@@ -4,7 +4,7 @@ import e from "express";
 const prisma = new PrismaClient ()
 
 export const getAllTransaksi = async (req, res) => {
-   try {
+try {
     const response = await prisma.transaksi.findMany()
     res.status(200).json(response)
     } catch (error) {
@@ -13,16 +13,16 @@ export const getAllTransaksi = async (req, res) => {
 }
 
 export const getTransaksiById = async (req, res) => {
-   try {
+try {
     const result = await prisma.transaksi.findUnique({
         where:{
             id_transaksi: Number(req.params.id)
         }
     })
     res.status(200).json(result)
-   } catch (error) {
+} catch (error) {
     res.status(400).json({msg: error.message})
-   }
+}
 }
 
 export const addTransaksi = async (req, res) => {
@@ -145,15 +145,15 @@ export const updateTransaksi = async (req, res) => {
 }
 
 export const deleteTransaksi = async (req, res) => {
-   try {
+try {
     const result = await prisma.transaksi.delete({
         where: {
             id_transaksi: Number(req.params.id)
         },
     })
     res.status(200).json(result)
-   } catch (error) {
+} catch (error) {
     res.status(400).json({msg: error.message})
-   }
+}
 }
 

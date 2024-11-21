@@ -4,30 +4,30 @@ import md5 from "md5";
 const prisma = new PrismaClient ()
 
 export const getAllUser = async (req, res) => {
-   try {
+try {
     const response = await prisma.user.findMany()
     res.status(200).json(response)
-   } catch (error) {
+} catch (error) {
     res.status(500).json({msg: error.message})
     }
 }
 
 
 export const getUserById = async (req, res) => {
-   try {
+try {
     const result = await prisma.user.findUnique({
         where:{
             id_user: Number(req.params.id)
         }
     })
     res.status(200).json(result)
-   } catch (error) {
+} catch (error) {
     res.status(400).json({msg: error.message})
-   }
+}
 }
 
 export const addUser = async (req, res) => {
-   try {
+try {
     const {nama_user, username, password} = req.body
     const result = await prisma.user.create({
         data: {
@@ -37,14 +37,14 @@ export const addUser = async (req, res) => {
         }
     })
     res.status(200).json(result)
-   } catch (error) {
+} catch (error) {
     console.log(error)
     res.status(400).json({msg: error.message})
-   }
+}
 }
 
 export const updateUser = async (req, res) => {
-   try {
+try {
     const {nama_user, username, password} = req.body
     const result = await prisma.user.update({
         where:{
@@ -57,20 +57,20 @@ export const updateUser = async (req, res) => {
         }
     })
     res.status(200).json(result)
-   } catch (error) {
+} catch (error) {
     res.status(400).json({msg: error.message})
-   }
+}
 }
 
 export const deleteUser = async (req, res) => {
-   try {
+try {
     const result = await prisma.user.delete({
         where: {
             id_user: Number(req.params.id)
         },
     })
     res.status(200).json(result)
-   } catch (error) {
+} catch (error) {
     res.status(400).json({msg: error.message})
-   }
+}
 }
