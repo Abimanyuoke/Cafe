@@ -7,6 +7,7 @@ import {
     addUser,
     deleteUser
 } from '../controllers/user_controller.js'
+import { authenticate } from '../controllers/auth_controller.js'
 
 const app = express()
 app.use(express.json())
@@ -17,5 +18,6 @@ app.post('/', addUser)
 app.put('/:id', updateUser)
 app.delete('/:id', deleteUser)
 
+app.post('login', authenticate)
 
 export default app
