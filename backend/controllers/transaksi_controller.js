@@ -78,19 +78,19 @@ export const getTransaksiById = async (req, res) => {
   }
 };
 export const addTransaksi = async (req, res) => {
-  let { id_user, id_meja, id_menus, nama_pelanggan, qty } = req.body;
+  let { id_user, id_meja, id_menu, nama_pelanggan, qty } = req.body;
 
   const [getUserId, getMejaId] = await Promise.all([
     prisma.user.findUnique({ where: { id_user: Number(id_user) } }),
     prisma.meja.findUnique({ where: { id_meja: Number(id_meja) } }),
   ]);
 
-  // Periksa apakah id_menus adalah array
+  // Periksa apakah id_menu adalah array
   if (
-    !Array.isArray(id_menus) ||
-    id_menus.length === 0 ||
+    !Array.isArray(id_menu) ||
+    id_menu.length === 0 ||
     !Array.isArray(qty) ||
-    qty.length !== id_menus.length
+    qty.length !== id_menu.length
   ) {
     return res
       .status(400)
@@ -118,7 +118,7 @@ export const addTransaksi = async (req, res) => {
       });
       if (result) {
         let total_harga = 0;
-        const detailPromises = id_menus.map(async (id_menu, index) => {
+        const detailPromises = id_menu.map(async (id_menu, index) => {
           const getMenuId = await prisma.menu.findUnique({
             where: { id_menu: Number(id_menu) },
           });
@@ -168,15 +168,15 @@ export const addTransaksi = async (req, res) => {
   }
 };
 export const updateTransaksi = async (req, res) => {
-  let { id_user, id_meja, id_menus, nama_pelanggan } = req.body;
+  let { id_user, id_meja, id_menu, nama_pelanggan } = req.body;
 
   const [getUserId, getMejaId] = await Promise.all([
     prisma.user.findUnique({ where: { id_user: Number(id_user) } }),
     prisma.meja.findUnique({ where: { id_meja: Number(id_meja) } }),
   ]);
 
-  // Periksa apakah id_menus adalah array
-  if (!Array.isArray(id_menus) || id_menus.length === 0) {
+  // Periksa apakah id_menu adalah array
+  if (!Array.isArray(id_menu) || id_menu.length === 0) {
     return res
       .status(400)
       .json({ msg: "id_menu harus berupa array dan tidak boleh kosong" });
@@ -200,7 +200,7 @@ export const updateTransaksi = async (req, res) => {
         },
       });
       if (result) {
-        const detailPromises = id_menus.map(async (id_menu) => {
+        const detailPromises = id_menu.map(async (id_menu) => {
           const getMenuId = await prisma.menu.findUnique({
             where: { id_menu: Number(id_menu) },
           });
