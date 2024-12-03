@@ -77,6 +77,7 @@ export const getTransaksiById = async (req, res) => {
     res.status(500).json({ msg: error.message });
   }
 };
+
 export const addTransaksi = async (req, res) => {
   let { id_user, id_meja, id_menu, nama_pelanggan, qty } = req.body;
 
@@ -167,6 +168,7 @@ export const addTransaksi = async (req, res) => {
     res.json({ msg: "pilih user, meja, dan menu yg tersedia" });
   }
 };
+
 export const updateTransaksi = async (req, res) => {
   let { id_user, id_meja, id_menu, nama_pelanggan } = req.body;
 
