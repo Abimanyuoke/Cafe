@@ -46,7 +46,7 @@ model Menu {
 
 model Meja {
   id_meja Int @id @default(autoincrement())
-  nomor_meja String
+  nomor_meja Int
   transaksi Transaksi []
 }
 

@@ -2,7 +2,7 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient ()
 
-import upload from "../upload_image_menu.js";
+import upload from "../middleware/upload_image_menu.js";
 
 export const getAllMenu = async (req, res) => {
 try {
